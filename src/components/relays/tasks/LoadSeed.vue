@@ -35,7 +35,6 @@ const localMethods = {
     this.queueJob(
       this.slug, 
       () => {
-        let total = 0
         const pool = new RelayPool(['wss://history.nostr.watch'])
         const subid = crypto.randomBytes(40).toString('hex')
         pool
@@ -48,10 +47,7 @@ const localMethods = {
             })
           })
           .on('event', (relay, sub_id, event) => {
-            console.log(event)
             if(subid === sub_id){
-              console.log(event)
-              console.log(total++)
               const relay = event.tags[0][1]
               const data = JSON.parse(event.content)
               const result = {

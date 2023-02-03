@@ -1,3 +1,6 @@
+import dotenv from 'dotenv'
+dotenv.config()
+
 export const timeSince = function(date) {
   var seconds = Math.floor((new Date() - date) / 1000);
   var interval = seconds / 31536000;
@@ -25,7 +28,8 @@ export const timeSince = function(date) {
 
 export const getVisitorGeo = async function() {
   let geo
-  const url = process.env.IP_API_KEY ? `https://ip-api.com/json/?fields=ip,lat,lon&key=${process.env.IP_API_KEY}` : `http://ip-api.com/json/?fields=ip,lat,lon`
+  console.log('ip-api key', process.env.VUE_APP_IP_API_KEY)
+  const url = process.env.VUE_APP_IP_API_KEY ? `https://ip-api.com/json/?fields=ip,lat,lon&key=${process.env.IP_API_KEY}` : `http://ip-api.com/json/?fields=ip,lat,lon`
   await fetch(url, { headers: { 'accept': 'application/dns-json' } })
           .then(response => response.json())
           .then((data) => { geo = data })
