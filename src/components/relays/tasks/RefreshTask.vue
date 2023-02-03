@@ -228,16 +228,7 @@ const localMethods = {
       let socket = new Inspector(relay, opts)
 
       socket
-        .on('open', () => {
-          if(!this.isSingle)
-            return
-          // if(this.results?.[this.relayFromUrl]?.latency?.average)
-          //   this.results[this.relayFromUrl].latency.average = null
-          // if(this.results?.[this.relayFromUrl]?.latency?.min)
-          //   this.results[this.relayFromUrl].latency.min = null
-          // if(this.results?.[this.relayFromUrl]?.latency?.max)
-          //   this.results[this.relayFromUrl].latency.max = null
-          this.setCache(this.results[this.relayFromUrl])
+        .on('open', () => {          
         })
         .on('complete', (instance) => {
           // console.log('completed?', instance.result)

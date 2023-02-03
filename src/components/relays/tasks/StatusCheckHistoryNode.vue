@@ -31,6 +31,8 @@ const localMethods = {
         const begin = Date.now()
         const timeout = setTimeout( () => {
           this.store.status.historyNode = 0
+          this.store.prefs.clientSideProcessingUpgrade = this.store.prefs.clientSideProcessing
+          this.store.prefs.clientSideProcessing = false 
           this.store.tasks.completeJob()
           $pool.close()
         }, 5000)

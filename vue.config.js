@@ -30,7 +30,6 @@ const config = {
     // },
     plugins: [
       new NodePolyfillPlugin(),
-      // new BundleAnalyzerPlugin()
     ],
     optimization: {
       usedExports: true,

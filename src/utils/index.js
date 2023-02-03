@@ -25,9 +25,28 @@ export const timeSince = function(date) {
 
 export const getVisitorGeo = async function() {
   let geo
-  await fetch(`http://ip-api.com/json/?fields=ip,lat,lon`, { headers: { 'accept': 'application/dns-json' } })
+  const url = process.env.IP_API_KEY ? `https://ip-api.com/json/?fields=ip,lat,lon&key=${process.env.IP_API_KEY}` : `http://ip-api.com/json/?fields=ip,lat,lon`
+  await fetch(url, { headers: { 'accept': 'application/dns-json' } })
           .then(response => response.json())
           .then((data) => { geo = data })
           .catch(err => console.error('./scripts/geo.js', err))
   return geo;
+}
+
+export const GeoIPGeo = async function(wss){
+  let dns
+  await fetch(`https://1.1.1.1/dns-query?name=${wss.replace('wss://', '')}`, { headers: { 'accept': 'application/dns-json' } })
+    .then(response => response.json())
+    .then((data) => { dns = data.Answer ? data.Answer : false })
+    .catch(err => console.error('./scripts/geo.js', err))
+  return dns
+}
+
+export const getDns = async function(relay){
+  let dns
+  await fetch(`https://1.1.1.1/dns-query?name=${relay.replace('wss://', '')}`, { headers: { 'accept': 'application/dns-json' } })
+    .then(response => response.json())
+    .then((data) => { dns = data.Answer ? data.Answer : false })
+    .catch(err => console.error('./scripts/geo.js', err))
+  return dns
 }
