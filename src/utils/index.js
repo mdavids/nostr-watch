@@ -29,7 +29,7 @@ export const timeSince = function(date) {
 export const getVisitorGeo = async function() {
   let geo
   console.log('ip-api key', process.env.VUE_APP_IP_API_KEY)
-  const url = process.env.VUE_APP_IP_API_KEY ? `https://ip-api.com/json/?fields=ip,lat,lon&key=${process.env.IP_API_KEY}` : `http://ip-api.com/json/?fields=ip,lat,lon`
+  const url = process.env.VUE_APP_IP_API_KEY ? `https://ip-api.com/json/?fields=ip,lat,lon&key=${process.env.VUE_APP_IP_API_KEY}` : `http://ip-api.com/json/?fields=ip,lat,lon`
   await fetch(url, { headers: { 'accept': 'application/dns-json' } })
           .then(response => response.json())
           .then((data) => { geo = data })
